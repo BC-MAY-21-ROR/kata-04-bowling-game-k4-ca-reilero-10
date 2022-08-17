@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Game # :nodoc:
-  attr_accessor :score, :frame, :pins, :tirada1, :tirada2
+  attr_accessor :score, :frame, :pins, :tirada1, :tirada2, :points
 
   def initialize(tirada1, tirada2)
     @rolls = []
@@ -17,25 +17,23 @@ class Game # :nodoc:
     @rolls << @pins
   end
 
-  def random    
-    tirada1 = rand(0..10)
-    tirada2 = rand(0..10)
-   end
-
   def chart
-    points = []
-    10.times do 
-      points.push(rand(0..10), rand(0..10), ' || ')
+    @points =  Array.new(9) { Array.new(2) }
+    (0..8 ).each do | i | # Turno
+      (0..1).each do | j |# Intentos
+        @points[i][j] = rand(0..10)
+      end
     end
-    print points
-    puts points[7]
+    print @points
   end
 
-  def points
-    10.times do
-      rules_score(@frame)
+  def pointer
+    p 'Puntaje'
+    result = Array.new(8)
+    (0..8 ).each do | k | # Resultado
+      result[k] = @points[k][0] + @points[k][1]
     end
-    @score
+    print result
   end
 
   def rules_score(_frame)
@@ -73,4 +71,5 @@ class Game # :nodoc:
 end
 
 game01 = Game.new(4,5)
-game01.chart()
+game01.chart
+game01.pointer
