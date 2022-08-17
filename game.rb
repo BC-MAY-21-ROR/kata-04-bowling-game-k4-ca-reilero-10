@@ -14,17 +14,21 @@ class Game # :nodoc:
   end
 
   def roll(pins)
-    @rolls.push(@tirada1)
-    @rolls.push(@tirada2)
-    puts @rolls
     @rolls << @pins
   end
 
-  def random
-   tirada1 = rand(0..10)
-   tirada2 = rand(0..10)
-  
-    
+  def random    
+    tirada1 = rand(0..10)
+    tirada2 = rand(0..10)
+   end
+
+  def chart
+    points = []
+    10.times do 
+      points.push(rand(0..10), rand(0..10), ' || ')
+    end
+    print points
+    puts points[7]
   end
 
   def points
@@ -69,4 +73,4 @@ class Game # :nodoc:
 end
 
 game01 = Game.new(4,5)
-game01.roll(10)
+game01.chart()
