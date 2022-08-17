@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
-require rspect
-require './game'
+require 'rspec'
+require_relative './game'
 
 describe Game do
-    describe '#initialize' do
-      it '' do
-        expect(Game.new(:alive, 5, 2).to_s).to eq('*')
+    describe '#chart' do
+      it 'creates a complete chart with the necessary rows' do
+     #   game = Game.new(0,0)
+      #  puts 'AAAAAAAAAAAA'
+      #  puntaje = game.chart
+     #    puts puntaje[0].size
+      #  expect(game.chart).to eq((0..9))
       end
     end
   end  

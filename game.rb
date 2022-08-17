@@ -24,7 +24,10 @@ class Game # :nodoc:
         @points[i][j] = rand(0..10)
       end
     end
+    @points.push(Array.new(3){0})
     print @points
+    puntaje = game.chart
+    puts puntaje.count
   end
 
   def pointer
