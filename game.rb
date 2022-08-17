@@ -35,7 +35,7 @@ class Game # :nodoc:
     end
     print result
   end
-
+  
   def rules_score(_frame)
     if strike?(@frame)
       @score += 10 + strike_bonus(@frame)
