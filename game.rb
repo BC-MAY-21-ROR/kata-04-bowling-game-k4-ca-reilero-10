@@ -26,8 +26,7 @@ class Game # :nodoc:
     end
     @points.push(Array.new(3){0})
     print @points
-    puntaje = game.chart
-    puts puntaje.count
+    @points
   end
 
   def pointer
@@ -37,6 +36,7 @@ class Game # :nodoc:
       result[k] = @points[k][0] + @points[k][1]
     end
     print result
+    result
   end
   
   def rules_score(_frame)
@@ -49,6 +49,17 @@ class Game # :nodoc:
     else
       @score += sum_of_balls_in_frame(@frame)
       @frame += 2
+    end
+    
+  end
+
+  def run_score(points)
+    @score = 0
+    (0..8).each do | r | 
+      (0..1).each do | q | 
+      #  rules_score(@points[r])
+      print points[r]
+      end
     end
   end
 
@@ -73,6 +84,10 @@ class Game # :nodoc:
   end
 end
 
+point = 0
+
 game01 = Game.new(4,5)
-game01.chart
-game01.pointer
+table = 0
+table = game01.chart
+point = game01.pointer
+game01.run_score(table)
