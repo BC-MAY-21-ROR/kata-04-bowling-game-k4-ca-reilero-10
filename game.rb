@@ -5,7 +5,7 @@ class Game # :nodoc:
 
   def initialize(tirada1, tirada2)
     # @rolls = []
-    @score = []
+    @score =  Array.new(9){0}
     @frame = 0
     @pins = 10
     @tirada1 = tirada1
@@ -28,65 +28,43 @@ class Game # :nodoc:
     # @points.push(Array.new(3){0})
     # print @points
     # @points = [[1, 4], [4, 5], [6, 4], [5, 5], [10, 0], [0, 1], [7, 3], [6, 4], [10, 0], [2, 8, 6]]
-    @points = [[10, 0], [4, 5], [6, 4], [5, 5], [10, 0], [0, 1], [7, 3], [6, 4], [10, 0], [2, 8, 6]]
+    @points = [[1, 4], [4, 5], [6, 4], [5, 5], [10, 0], [0, 1], [7, 3], [6, 4], [10, 0], [2, 8, 6]]
     print @points          
     return @points
   end
 
-  def pointer
-    #p 'Puntaje'
-    @result = Array.new(8)
-    (0..8 ).each do | k | # Resultado
-
-      @result[k] = @points[k][0] + @points[k][1]
-
-    end
-    puts ""
-    print result
-    @result
-  end
-
-  
-  def sumato
-
-    (0..8 ).each do | l | # Resultado
-
-      @sum[l] = @result[l+1].to_i + @sum[l].to_i
-
-    end
-
-    puts "HOLAAAAAA"
-    print @sum
-
-  end 
-  
-  #REcorrer los puntos y envia frame e intento
+  # Recorrer los puntos y envia frame e intento
   def run_score(points)
     p 'run'
+    @total =  Array.new(9){0}
+    result_score_act = 0
     (0..8).each do | r |
       (0..1).each do | q |
-        rules_score(r,q)
+        
+        result_score_act = rules_score(r,q)
+
       end
+       #p result_score_act[0].to_i
+      #total[r] = result_score_act.to_i + total[r-1].to_i
     end
     print @score
+   
   end
   
   def rules_score(frame,try)
 
-    i = 0
     turn =  @points[frame][try]
     #next_frame = @points[i+1][j].to_i + @points[i+1][j+1].to_i
-
+    
     #print frame 
     #print turn
-    @score[frame] = 0
+      if strike?(turn)
+        
+        @score[frame] += 10 + strike_bonus(frame+1)
 
-    if strike?(turn)
-      print turn 
-      @score[frame] = 10 + strike_bonus(frame+1)
-    end
+      end
 
-    print @score
+    
     #elsif spare?(turn)
      #  @score += 10 + spare_bonus(turn)
       # turn += 2
@@ -94,7 +72,7 @@ class Game # :nodoc:
     #   @score += sum_of_balls_in_frame(turn)
     #   turn += 2
     # end
-    
+    @score
   end
   def strike?(turn)
     turn == 10
@@ -123,5 +101,4 @@ point = 0
 game01 = Game.new(4,5)
 table = 0
 table = game01.chart
-point = game01.pointer
 game01.run_score(table)
